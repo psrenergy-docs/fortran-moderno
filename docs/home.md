@@ -21,28 +21,76 @@ type :: onibus
     ! Atributos
     integer       :: capacidade_maxima
     integer       :: numero_de_passageiros
-    logical       :: estado_porta_embarque
-    logical       :: estado_porta_desembarque
+    logical       :: estado_da_porta
     character(20) :: proxima_parada
 
     ! Métodos
     contains
         procedure :: andar
-        procedure :: parar_no_ponto
-        procedure :: abrir_porta_embarque
-        procedure :: abrir_porta_desembarque
+        procedure :: parar
+        procedure :: abrir_porta
         procedure :: verificar_numero_passageiros
-        procedure :: anuncia_proxima_parada
+        procedure :: anunciar_proxima_parada
 end type onibus
 ```
 
-No exemplo acima, foi definida uma classe, em Fortran, para representar um ônibus de tranporte. Foram definidos alguns atributos que caracterizam um ônibus em sua qualidade de transporte público, tal como `capacidade_maxima`
-e `proxima_parada`. Além dos atributos, foram declarados métodos para representar possíveis ações típicas de um ônibus como `andar` e `abrir_porta_embarque`.
+No exemplo acima, foi definida uma classe, em Fortran, para representar um ônibus para transporte. Foram definidos alguns atributos que caracterizam um ônibus em sua qualidade de transporte público, tal como `capacidade_maxima`
+e `proxima_parada`. Além dos atributos, foram declarados métodos para representar ações típicas de um ônibus como `andar` e `abrir_porta_embarque`.
 
 Uma das principais características da POO é possibilidade de restringir o acesso do usuário da classe a determinados atributos e métodos, disponibilizando somente o essencial a ele. Este conceito é conhecido como **encapsulamento**, o qual também está relacionado a outro, conhecido como **abstração**. A abstração é ato de esconder do usuário detalhes internos da implementação de um código, fornecendo somente informações sobre a funcionalidade desse conjunto de instruções.
 
- No Fortran, um aliado importante das classes é o bloco `module`. A estrutura `module` permite declarar variáveis, procedimentos e classes dentro do bloco definido por ela. Entretanto, o que a torna uma excelente companheira das classes é a possibilidade que controlar o acesso dos dados declarados dentro dela. Logo, é possível realizar o encapsulamento de dados, bem como construir camadas de abstração de forma organizada e modular com o uso da estrutura `module`. 
+ No Fortran, um aliado importante das classes é o bloco `module`. A estrutura `module` permite declarar variáveis, procedimentos e classes dentro do bloco definido por ela. Entretanto, o que a torna uma excelente companheira das classes é a possibilidade que controlar o acesso dos dados declarados dentro dela com o uso das palavras `private` e `public`. **Em um módulo, os dados são públicos por padrão**. Logo, é possível realizar o encapsulamento de dados, bem como construir camadas de abstração de forma organizada e modular com o uso da estrutura `module`. Um exemplo de uso do `module` para a classe `onibus` definida anteriormente é:
 
-Essas características permitem que a POO seja utilizada para produzir códigos modularizados, seguros e com alto nível de abstração.
+ ```Fortran
 
+module transporte
+    implicit none
 
+    ! Tornar dados e procedimentos do módulo privados
+    private
+    
+    ! Tornar somente classe onibus como pública
+    public :: onibus
+    
+    ! Classe onibus
+    type :: onibus
+        ! Atributos
+        integer       :: capacidade_maxima
+        integer       :: numero_de_passageiros
+        logical       :: estado_da_porta
+        character(20) :: proxima_parada
+
+        ! Métodos
+        contains
+            procedure :: andar
+            procedure :: parar
+            procedure :: abrir_porta
+            procedure :: verificar_numero_passageiros
+            procedure :: anunciar_proxima_parada
+    end type onibus
+
+    contains
+        subroutine andar (self)
+            <definição do procedimento>
+        end subroutine andar
+
+        subroutine parar (self)
+            <definição do procedimento>
+        end subroutine parar
+
+        subroutine abrir_porta (self)
+            <definição do procedimento>
+        end subroutine abrir_porta
+
+        subroutine verificar_numero_passageiros (self)
+            <definição do procedimento>
+        end subroutine verificar_numero_passageiros
+
+        subroutine anunciar_proxima_parada (self)
+            <definição do procedimento>
+        end subroutine anunciar_proxima_parada
+
+end module transporte
+```
+
+Existem diversas formas de escrever um módulo e uma classe em Fortran. Algumas delas serão mostradas nesta documentação, entretanto com o que foi mostrado acima é possível perceber qua o Fortran possui as funcionalidades necessárias para uma implementação baseada em POO.
