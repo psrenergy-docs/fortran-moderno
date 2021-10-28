@@ -1,6 +1,6 @@
 ---
 title: Classes
-nav_order: 3
+nav_order: 2
 ---
 
 # Classes
@@ -16,7 +16,7 @@ Classes são estruturas formadas por atributos e métodos capazes de representar
 
 ## Criando uma classe em Fortran
 
-Classes, no contexto do Fortran, são estruturas `type` às quais podem ser associados variáveis, que irão representar atributos, e procedimentos, que são os métodos da classe. É boa prática definir classes dentro de estruturas `module` do Fortran, pois elas permitem o **controle de acesso dos dados**, o qual é feito através das palavras `public` e `private`. Para criar uma classe, a sintaxe é a seguinte:
+Classes, no contexto do Fortran, são estruturas `type` às quais podem ser associadas variáveis, que irão representar atributos, e procedimentos, que são os métodos da classe. É boa prática definir classes dentro de estruturas `module` do Fortran, pois elas permitem o **controle de acesso dos dados**, o qual é feito através das palavras `public` e `private`. Para criar uma classe, a sintaxe é a seguinte:
 
 ```Fortran
 type :: <nome da classe>
@@ -93,7 +93,7 @@ Na declaração do procedimento de classe `norma`, foi usado o especificador `pa
 
 ## Classes derivadas
 
-O Fortran permite que classes sejam criadas a partir de outras já existentes. Neste processo, a nova classe herda os membros da classe usada como base. As classes derivadas são chamadas de ***extend types***. Uma classe derivada pode ser criada da seguinte forma:
+O Fortran permite que classes sejam criadas a partir de outras já existentes. Neste processo, a nova classe herda os membros da classe usada como base. As classes derivadas são chamadas de ***extended types***. Uma classe derivada pode ser criada da seguinte forma:
 
 ```Fortran
 module Geo
